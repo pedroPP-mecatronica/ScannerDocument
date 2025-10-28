@@ -6,10 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -26,12 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.designsystem.DSOutlinedTextField
+import com.example.designsystem.DSPasswordTextField
+import com.example.designsystem.DSSpacerLarge
+import com.example.designsystem.DSSpacerMedium
+import com.example.designsystem.DSSpacerSmall
+import com.example.designsystem.DSTextMedium
 import com.example.scannerdocument.di.scannerModules
 import com.example.scannerdocument.ui.theme.ScannerDocumentTheme
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
 class ScannerLoginActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,41 +64,23 @@ fun LoginScreen() {
     var password by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
+        modifier = Modifier.fillMaxSize().padding(23.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Cadastro", style = MaterialTheme.typography.headlineMedium)
+        DSTextMedium("Cadastro")
 
-        Spacer(modifier = Modifier.height(75.dp))
+        DSSpacerLarge()
 
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Usuário") },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth()
-        )
+        DSOutlinedTextField(value = username, onValueChange = { username = it }, label = "Usuário")
 
-        Spacer(modifier = Modifier.height(8.dp))
+        DSSpacerSmall()
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Senha") },
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
-        )
+        DSPasswordTextField(password, onValueChange = { password = it }, label = "Senha")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        DSSpacerMedium()
 
-        Button(
-            onClick = { /* ação de login */ },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Button(onClick = { /* ação de login */ }, modifier = Modifier.fillMaxWidth()) {
             Text("Entrar")
         }
     }

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Scanner Document"
 include(":app")
+include(":designsystem")
